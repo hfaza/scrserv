@@ -1,3 +1,19 @@
+# Kelompok ScrSrv
+
+- Danang Tri Atmaja     - 22.83.0826
+- Ma'rifah Hadaina Faza - 22.83.0842
+- Kuncoro Sihna Mahendra- 22.83.0846
+- Ridha Nurrachmat      - 22.83.0857
+- Vito Desla Fergiyan   - 22.83.0877
+
+## Server
+- Load Balancer Haproxy
+- NginX Web Server
+- Monitoring NetData
+
+## Operating System
+Ubuntu Server 20.04 ![download](https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso)
+
 ### Install SSH di Ubuntu 20.04
 ```bash
 sudo apt-get update
@@ -25,9 +41,10 @@ sudo apt-get update
 sudo apt-get install haproxy
 
 ```
-## Install NginX + SSL (Let's Encrypt)
+## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
-kita menggunakan NginX untuk mengelola Web
+Saya menggunakan NginX untuk mengelola Web saya
+
 ```bash
 #Installasi NginX
 sudo apt install nginx
@@ -40,7 +57,7 @@ sudo systemctl status nginx
 ### Konfigurasi NginX
 untuk melakukan konfigurasi menggunakan nano
 ```bash
-sudo nano /etc/nginx/sites-available/danangtri.my.id.conf
+sudo nano /etc/nginx/sites-available/scrsrv.my.id.conf
 ```
 ```bash
 server {
@@ -62,7 +79,7 @@ server {
 ```
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
-sudo ln -s /etc/nginx/sites-available/danangtri.my.id.conf /etc/nginx/sites-enabled/danangtri.my.id.conf
+sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
 
 #Verifikasi konfigurasi nginx
 sudo nginx -t
