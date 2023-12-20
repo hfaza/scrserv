@@ -12,7 +12,8 @@
 - Monitoring NetData
 
 ## Operating System
-Ubuntu Server 20.04 ![download](https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso)
+Ubuntu Server 20.04 
+https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso
 
 ### Install SSH di Ubuntu 20.04
 ```bash
@@ -34,6 +35,7 @@ karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 mak
 harus menambahkan parameter -p / port
 
 ## Install haproxy
+![haproxy_images](https://github.com/Xzhacts-Crew/scrserv/assets/114817148/bc74202b-2efe-4281-8a06-421b13eb7b59)
 ```bash
 #update repo terlebih dahulu
 sudo apt-get update
