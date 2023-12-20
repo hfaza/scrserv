@@ -28,9 +28,12 @@ sudo ufw allow ssh
 ```
 SSH sudah terinstall, anda bisa menggunakan nya pada cmd/terminal
 menggunakan command :
+
 > ssh user@ip_address
+
 contoh
 > ssh and@103.82.92.91 -p 1515
+
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
 
@@ -54,8 +57,6 @@ sudo apt install nginx
 #Periksa status NginX
 sudo systemctl status nginx
 ```
-![image](https://github.com/dword32bit/SysAdmin/assets/114817148/4640fe36-9040-4bf5-ad76-410252ad6855)
-
 ### Konfigurasi NginX
 untuk melakukan konfigurasi menggunakan nano
 ```bash
