@@ -57,6 +57,32 @@ sudo apt-get update
 sudo apt-get install haproxy
 
 ```
+### Install  netdata
+```bash
+#langkah install
+sudo apt update
+sudo apt install -y netdata
+# konfigurasi netdata
+sudo nano /etc/netdata/netdata.conf
+#ganti bind socket menjadi 0.0.0.0 supaya dapat diakses semua network
+outout :
+  [global]
+        run as user = netdata
+        web files owner = root
+        web files group = root
+        # Netdata is not designed to be exposed t o potentially hostile
+        # network. See https://github.com/netdata/netdata/issues/164
+        bind socket to IP = 0.0.0.0
+#cek status
+sudo systemctl start netdata
+sudo systenctl enable netdata
+sudo systemctl status netdata
+  output
+#perizinan
+#allow port menggunakan ufw. netdata bekerja pada port 19999
+ufw allow 19999/tcp
+```
+
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
 Saya menggunakan NginX untuk mengelola Web saya
@@ -68,6 +94,7 @@ sudo apt install nginx
 #Periksa status NginX
 sudo systemctl status nginx
 ```
+
 ### Konfigurasi NginX
 untuk melakukan konfigurasi menggunakan nano
 ```bash
