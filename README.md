@@ -37,14 +37,14 @@ contoh
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
 
-## Aktivasi UFW
+## Aktifasi UFW
 ```bash
 #perintah UFW sudah terpasang dengan menjalankan perintah sebagai berikut :
 sudo apt update
 sudo apt install ufw
 #aktfasi UFW
 sudo ufw enable
-#cek atifasi UFW
+#cek status UFW
 sudo ufw status
 ```
 
