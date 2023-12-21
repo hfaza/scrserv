@@ -37,6 +37,17 @@ contoh
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
 
+## Aktivasi UFW
+```bash
+#perintah UFW sudah terpasang dengan menjalankan perintah sebagai berikut :
+sudo apt update
+sudo apt install ufw
+#aktfasi UFW
+sudo ufw enable
+cek atifasi UFW
+sudo ufw status
+```
+
 ## Install haproxy
 ![haproxy_images](https://github.com/Xzhacts-Crew/scrserv/assets/114817148/bc74202b-2efe-4281-8a06-421b13eb7b59)
 ```bash
