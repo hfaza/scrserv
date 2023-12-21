@@ -44,7 +44,7 @@ sudo apt update
 sudo apt install ufw
 #aktfasi UFW
 sudo ufw enable
-cek atifasi UFW
+#cek atifasi UFW
 sudo ufw status
 ```
 
