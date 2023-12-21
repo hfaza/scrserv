@@ -57,6 +57,18 @@ sudo apt-get update
 sudo apt-get install haproxy
 
 ```
+## Konfigurasi Haproxy
+```bash
+#edit file haproxy
+frontend web
+  bind*;80
+  default_backend app_servers
+backend app_servers
+  balance roundrobin
+  sever web1 192.168.179.5:80 check
+  sever web2 192.168.179.10:80 check
+```
+
 ### Install  netdata
 ```bash
 #langkah install
