@@ -70,8 +70,8 @@ backend app_servers
 ```
 
 ## Install dan Konfigurasi DNS Server
-# Install DNS Server
 ```bash
+# Install DNS Server
 sudo apt update && sudo apt upgrade
 sudo apt install bind9
 # konfigurasi DNS Server
