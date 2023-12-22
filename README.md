@@ -1,20 +1,22 @@
 ## Kelompok ScrServ
-
 - Danang Tri Atmaja     - 22.83.0826
 - Ma'rifah Hadaina Faza - 22.83.0842
 - Kuncoro Sihna Mahendra- 22.83.0846
 - Ridha Nurrachmat      - 22.83.0857
 - Vito Desla Fergiyan   - 22.83.0877
 
+
 ## Server
 - Load Balancer Haproxy
 - NginX Web Server
 - Monitoring NetData
 - DNS Server
+
    
 ## Operating System
 Ubuntu Server 20.04 
 https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso
+
 
 ### Install SSH di Ubuntu 20.04
 ```bash
@@ -29,14 +31,12 @@ sudo ufw allow ssh
 ```
 SSH sudah terinstall, anda bisa menggunakan nya pada cmd/terminal
 menggunakan command :
-
 > ssh user@ip_address
-
 contoh
 > ssh and@103.82.92.91 -p 1515
-
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
+
 
 ## Aktifasi UFW
 ```bash
@@ -49,6 +49,7 @@ sudo ufw enable
 sudo ufw status
 ```
 
+
 ## Install haproxy
 ![haproxy_images](https://github.com/Xzhacts-Crew/scrserv/assets/114817148/bc74202b-2efe-4281-8a06-421b13eb7b59)
 ```bash
@@ -56,8 +57,9 @@ sudo ufw status
 sudo apt-get update
 #installasi haproxy
 sudo apt-get install haproxy
-
 ```
+
+
 ## Konfigurasi Haproxy
 ```bash
 #edit file haproxy
