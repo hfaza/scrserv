@@ -161,10 +161,10 @@ network:
   version: 2
 
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
-#Hanya server yang dapat mengakses web server
+#Hapus semua port allow ufw, dan hanya server yang dapat mengakses web server
 ufw allow from 192.168.1.5
 ```
-![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv_port.jpg)
+![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv.jpg)
 
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
