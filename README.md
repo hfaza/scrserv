@@ -31,9 +31,8 @@ SSH sudah terinstall, anda bisa menggunakan nya pada cmd/terminal
 menggunakan command :
 
 > ssh user@ip_address
-
 contoh
-> ssh and@103.82.92.91 -p 1515
+> ssh and@192.168.1.5 -p 1515
 
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
@@ -160,16 +159,13 @@ zone "1.1.10.in-addr.arpa"{
         file "/etc/bind/db.ip";
 };
 ```
-
 ```bash
 # melakukan forwarding untuk mengakses domain seperti google.com, facebook.com. disini menggunakan DNS dari google 8.8.8.8 sebagai forwarding
 # konfigurasi
 sudo nano named.conf.option
 # konfigurasi seperti berikut
-
 options {
         directory "/var/cache/bind";
-
         // If there is a firewall between you and nameservers you want
         // to talk to, you may need to fix the firewall to allow multiple
         // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
@@ -178,7 +174,6 @@ options {
         // nameservers, you probably want to use them as forwarders.
         // Uncomment the following block, and insert the addresses replacing
         // the all-0's placeholder.
-
         forwarders {
         8.8.8.8;
         };
@@ -240,11 +235,9 @@ sudo systemctl status netdata
 #allow port menggunakan ufw. netdata bekerja pada port 19999
 sudo ufw allow 19999/tcp
 ```
-
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
 Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem operasi yang terpisah dengan server
-
 ```bash
 #Installasi NginX
 sudo apt install nginx
@@ -270,10 +263,8 @@ server {
         location / {
                 try_files $uri $uri/ =404;
         }
-
         error_log /var/log/nginx/scrsrv.my.id.error;
         access_log /var/log/nginx/scrsrv.my.id.access;
-
 }
 
 #Installasi FTP server
@@ -295,7 +286,6 @@ network:
       addresses: [192.168.1.20/24]
       gateway: 192.168.1.1
   version: 2
-
 #Sistem operasi kedua
 nano /etc/netplan/00-installer-config.yaml
 network:
@@ -305,7 +295,6 @@ network:
       addresses: [192.168.1.30/24]
       gateway: 192.168.1.1
   version: 2
-
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
 #Hapus semua port allow ufw, dan hanya server yang dapat mengakses web server
 ufw allow deny 80/tcp
@@ -324,14 +313,11 @@ iptables -I INPUT -p tcp --dport 80 -m state --state NEW -m recent --set
 
 iptables -I INPUT -p tcp --dport 80 -m state --state NEW --state NEW -m recent --update --seconds 20 --hitcount 10 -j DROP
 ```
-
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
 sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
-
 #Verifikasi konfigurasi nginx
 sudo nginx -t
-
 #jika muncul test is successful berarti tidak ada kendala dalam konfigurasi nginx
 
 #restart nginx
