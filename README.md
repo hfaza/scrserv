@@ -10,7 +10,8 @@
 - Load Balancer Haproxy
 - NginX Web Server
 - Monitoring NetData
-
+- DNS Server
+- 
 ## Operating System
 Ubuntu Server 20.04 
 https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso
@@ -136,7 +137,7 @@ $TTL    604800
                          604800 )       ; Negative Cache TTL
 ;
 @       IN      NS      scrserv.com.
-5      IN      PTR     scrserv.com.
+5       IN      PTR     scrserv.com.
 ```
 ```bash
 sudo nano named.conf.local
@@ -307,7 +308,8 @@ network:
 
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
 #Hapus semua port allow ufw, dan hanya server yang dapat mengakses web server
-ufw allow from 192.168.1.5
+ufw allow deny 80/tcp
+ufw allow from 192.168.1.5 to any port www
 ```
 ![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv.jpg)
 
