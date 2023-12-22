@@ -79,9 +79,10 @@ cd /etc/bind
 sudo cp db.127 db.ip
 sudo cp db.local db.domain
 ```
+
+```bash
 # setelah 2 file tersebut terbuka edit file db.domain
 sudo nano db.domain
-```bash
 ;
 ; BIND data file for local loopback interface
 ;
@@ -99,8 +100,8 @@ www     IN      A       192.168.1.5
 blog    IN      A       192.168.1.5
 ```
 
-# jika ingin menambahkan mx record yang akan digunakan ikuti konfigurasi seperti dibawah
 ```bash
+# jika ingin menambahkan mx record yang akan digunakan ikuti konfigurasi seperti dibawah
 #konfigurasi
 ;
 ; BIND data file for local loopback interface
@@ -121,8 +122,8 @@ mail    IN      A       192.168.1.5
 blog    IN      CNAME   www
 ```
 
-#konfigurasi pada db.ip
 ```bash
+#konfigurasi pada db.ip
 ;
 ; BIND reverse data file for local loopback interface
 ;
@@ -159,8 +160,8 @@ zone "1.1.10.in-addr.arpa"{
 };
 ```
 
-# melakukan forwarding untuk mengakses domain seperti google.com, facebook.com. disini menggunakan DNS dari google 8.8.8.8 sebagai forwarding
 ```bash
+# melakukan forwarding untuk mengakses domain seperti google.com, facebook.com. disini menggunakan DNS dari google 8.8.8.8 sebagai forwarding
 # konfigurasi
 sudo nano named.conf.option
 # konfigurasi seperti berikut
