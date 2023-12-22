@@ -317,21 +317,15 @@ ufw allow from 192.168.1.5 to any port www
 Disini kita menggunakan iptables untuk drop DDos
 ```bash
 iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
-
 iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
-
 iptables -I INPUT -p tcp --dport 80 -m state --state NEW -m recent --set
-
 iptables -I INPUT -p tcp --dport 80 -m state --state NEW --state NEW -m recent --update --seconds 20 --hitcount 10 -j DROP
 ```
-
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
 sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
-
 #Verifikasi konfigurasi nginx
 sudo nginx -t
-
 #jika muncul test is successful berarti tidak ada kendala dalam konfigurasi nginx
 
 #restart nginx
