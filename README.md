@@ -11,7 +11,7 @@
 - NginX Web Server
 - Monitoring NetData
 - DNS Server
-   
+  
 ## Operating System
 Ubuntu Server 20.04 
 https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso
@@ -33,7 +33,7 @@ menggunakan command :
 > ssh user@ip_address
 
 contoh
-> ssh and@103.82.92.91 -p 1515
+> ssh and@192.168.1.5 -p 1515
 
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
@@ -240,7 +240,6 @@ sudo systemctl status netdata
 #allow port menggunakan ufw. netdata bekerja pada port 19999
 sudo ufw allow 19999/tcp
 ```
-
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
 Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem operasi yang terpisah dengan server
@@ -248,7 +247,6 @@ Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem ope
 ```bash
 #Installasi NginX
 sudo apt install nginx
-
 #Periksa status NginX
 sudo systemctl status nginx
 ```
@@ -273,15 +271,12 @@ server {
 
         error_log /var/log/nginx/scrsrv.my.id.error;
         access_log /var/log/nginx/scrsrv.my.id.access;
-
 }
 
 #Installasi FTP server
 sudo apt install vsftpd
-
 #Menyalin file konfigurasi sebagai backup
 sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
-
 #Izinkan port berkaitan dengan ftp, Kemudian dengan FTP kirimkan file-file pendukung web server
 sudo ufw allow 20,21,990/tcp
 
@@ -305,33 +300,17 @@ network:
       addresses: [192.168.1.30/24]
       gateway: 192.168.1.1
   version: 2
-
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
 #Hapus semua port allow ufw, dan hanya server yang dapat mengakses web server
 ufw allow deny 80/tcp
 ufw allow from 192.168.1.5 to any port www
 ```
 ![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv.jpg)
-
-## Konfigurasi iptables
-Disini kita menggunakan iptables untuk drop DDos
-```bash
-iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
-
-iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
-
-iptables -I INPUT -p tcp --dport 80 -m state --state NEW -m recent --set
-
-iptables -I INPUT -p tcp --dport 80 -m state --state NEW --state NEW -m recent --update --seconds 20 --hitcount 10 -j DROP
-```
-
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
 sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
-
 #Verifikasi konfigurasi nginx
 sudo nginx -t
-
 #jika muncul test is successful berarti tidak ada kendala dalam konfigurasi nginx
 
 #restart nginx
