@@ -105,6 +105,30 @@ sudo apt install nginx
 
 #Periksa status NginX
 sudo systemctl status nginx
+```
+
+### Konfigurasi NginX
+untuk melakukan konfigurasi menggunakan nano
+```bash
+sudo nano /etc/nginx/sites-available/scrsrv.my.id.conf
+```
+```bash
+server {
+        listen 80;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name scrsrv.my.id www.scrsrv.my.id;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        error_log /var/log/nginx/scrsrv.my.id.error;
+        access_log /var/log/nginx/scrsrv.my.id.access;
+
+}
 
 #Installasi FTP server
 sudo apt install vsftpd
@@ -138,35 +162,10 @@ network:
 
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
 #Hanya server yang dapat mengakses web server
-sudo ufw enable
-sudo ufw allow from 192.168.1.5 to any port 80/tcp
-sudo ufw deny 80/tcp
+ufw allow from 192.168.1.5
 ```
 ![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv_port.jpg)
 
-### Konfigurasi NginX
-untuk melakukan konfigurasi menggunakan nano
-```bash
-sudo nano /etc/nginx/sites-available/scrsrv.my.id.conf
-```
-```bash
-server {
-        listen 80;
-
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name scrsrv.my.id www.scrsrv.my.id;
-
-        location / {
-                try_files $uri $uri/ =404;
-        }
-
-        error_log /var/log/nginx/scrsrv.my.id.error;
-        access_log /var/log/nginx/scrsrv.my.id.access;
-
-}
-```
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
 sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
