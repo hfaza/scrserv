@@ -69,6 +69,23 @@ backend app_servers
   sever web2 192.168.1.30:80 check
 ```
 
+### Install SSL
+```bash
+#Konfigurasi Netplan
+sudo nano /etc/netplan/00-installer-config.yaml
+#masukan konfigurasi seperti dibawah
+network:
+ ethernets:
+  enp0s3:
+   dhcp4: false
+   addresses: [192.168.1.5/24]
+   gateway4: 192.168.1.1
+   nameservers:
+    search: [scrserv.xy]
+    d addresses: [192.168.1.5, 192.168.1.1]
+  version: 2
+```
+
 ### Install  netdata
 ```bash
 #langkah install
