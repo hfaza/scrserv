@@ -97,7 +97,7 @@ sudo ufw allow 19999/tcp
 
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
-Saya menggunakan NginX untuk mengelola Web saya
+Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem operasi yang terpisah dengan server
 
 ```bash
 #Installasi NginX
@@ -105,7 +105,41 @@ sudo apt install nginx
 
 #Periksa status NginX
 sudo systemctl status nginx
+
+#Installasi FTP server
+sudo apt install vsftpd
+
+#Menyalin file konfigurasi sebagai backup
+sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
+
+#Izinkan port berkaitan dengan ftp, Kemudian dengan FTP kirimkan file-file pendukung web server
+sudo ufw allow 20,21,990/tcp
+
+#Konfigurasi ip address pada masing-masing sistem operasi web server
+#Sistem operasi pertama
+nano /etc/netplan/00-installer-config.yaml
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.179.5/24]
+      gateway: 192.168.179.1
+  version: 2
+
+#Sistem operasi kedua
+nano /etc/netplan/00-installer-config.yaml
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.179.5/24]
+      gateway: 192.168.179.1
+  version: 2
+
+#Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
+#Hanya server yang dapat mengakses web server 
 ```
+![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv_port.jpg)
 
 ### Konfigurasi NginX
 untuk melakukan konfigurasi menggunakan nano
