@@ -61,7 +61,7 @@ sudo apt-get install haproxy
 ```bash
 #edit file haproxy
 frontend web
-  bind*;80
+  bind *:80
   default_backend app_servers
 backend app_servers
   balance roundrobin
