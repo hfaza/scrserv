@@ -82,7 +82,7 @@ network:
    gateway4: 192.168.1.1
    nameservers:
     search: [scrserv.xy]
-    d addresses: [192.168.1.5, 192.168.1.1]
+    addresses: [192.168.1.5, 192.168.1.1]
   version: 2
 ```
 
