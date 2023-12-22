@@ -69,9 +69,9 @@ backend app_servers
   sever web2 192.168.1.30:80 check
 ```
 
-### Install dan Konfigurasi DNS Server
-```bash
+## Install dan Konfigurasi DNS Server
 # Install DNS Server
+```bash
 sudo apt update && sudo apt upgrade
 sudo apt install bind9
 # konfigurasi DNS Server
