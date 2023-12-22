@@ -11,7 +11,7 @@
 - NginX Web Server
 - Monitoring NetData
 - DNS Server
-- 
+  
 ## Operating System
 Ubuntu Server 20.04 
 https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso
