@@ -33,7 +33,7 @@ menggunakan command :
 > ssh user@ip_address
 
 contoh
-> ssh and@103.82.92.91 -p 1515
+> ssh and@192.168.1.5 -p 1515
 
 karena konfigurasi port pada /etc/ssh/sshd_config telah diganti menjadi 1515 maka,
 harus menambahkan parameter -p / port
