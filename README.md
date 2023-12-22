@@ -1,5 +1,4 @@
 ## Kelompok ScrServ
-
 - Danang Tri Atmaja     - 22.83.0826
 - Ma'rifah Hadaina Faza - 22.83.0842
 - Kuncoro Sihna Mahendra- 22.83.0846
@@ -80,7 +79,6 @@ cd /etc/bind
 sudo cp db.127 db.ip
 sudo cp db.local db.domain
 ```
-
 ```bash
 # setelah 2 file tersebut terbuka edit file db.domain
 sudo nano db.domain
@@ -145,7 +143,6 @@ sudo nano named.conf.local
 //
 // Do any local configuration here
 //
-
 // Consider adding the 1918 zones here, if they are not used in your
 // organization
 //include "/etc/bind/zones.rfc1918";
@@ -154,7 +151,6 @@ zone "scrserv.com"{
         type master;
         file "/etc/bind/db.domain";
 };
-
 zone "1.1.10.in-addr.arpa"{
         type master;
         file "/etc/bind/db.ip";
@@ -182,7 +178,6 @@ options {
         forwarders {
         8.8.8.8;
         };
-
         //========================================================================
         // If BIND logs error messages about the root key being expired,
         // you will need to update your keys.  See https://www.isc.org/bind-keys
@@ -214,7 +209,6 @@ network:
     addresses: [192.168.1.5, 192.168.1.1]
   version: 2
 ```
-
 ### Install  netdata
 ```bash
 #langkah install
@@ -240,7 +234,6 @@ sudo systemctl status netdata
 #allow port menggunakan ufw. netdata bekerja pada port 19999
 sudo ufw allow 19999/tcp
 ```
-
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
 Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem operasi yang terpisah dengan server
@@ -252,7 +245,6 @@ sudo apt install nginx
 #Periksa status NginX
 sudo systemctl status nginx
 ```
-
 ### Konfigurasi NginX
 untuk melakukan konfigurasi menggunakan nano
 ```bash
@@ -261,7 +253,6 @@ sudo nano /etc/nginx/sites-available/scrsrv.my.id.conf
 ```bash
 server {
         listen 80;
-
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
 
@@ -273,7 +264,6 @@ server {
 
         error_log /var/log/nginx/scrsrv.my.id.error;
         access_log /var/log/nginx/scrsrv.my.id.access;
-
 }
 
 #Installasi FTP server
@@ -295,7 +285,6 @@ network:
       addresses: [192.168.1.20/24]
       gateway: 192.168.1.1
   version: 2
-
 #Sistem operasi kedua
 nano /etc/netplan/00-installer-config.yaml
 network:
@@ -305,14 +294,12 @@ network:
       addresses: [192.168.1.30/24]
       gateway: 192.168.1.1
   version: 2
-
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
 #Hapus semua port allow ufw, dan hanya server yang dapat mengakses web server
 ufw allow deny 80/tcp
 ufw allow from 192.168.1.5 to any port www
 ```
 ![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv.jpg)
-
 simpan konfigurasi dan jalankan konfigurasi tersebut
 ```bash
 sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled/scrsrv.my.id.conf
