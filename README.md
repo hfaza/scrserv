@@ -92,7 +92,7 @@ sudo systemctl status netdata
   output
 #perizinan
 #allow port menggunakan ufw. netdata bekerja pada port 19999
-ufw allow 19999/tcp
+sudo ufw allow 19999/tcp
 ```
 
 ## Install NginX
