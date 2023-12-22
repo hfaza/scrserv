@@ -319,9 +319,7 @@ sudo ln -s /etc/nginx/sites-available/scrsrv.my.id.conf /etc/nginx/sites-enabled
 
 #Verifikasi konfigurasi nginx
 sudo nginx -t
-
 #jika muncul test is successful berarti tidak ada kendala dalam konfigurasi nginx
-
 #restart nginx
 sudo systemctl restart nginx
 ```
