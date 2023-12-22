@@ -69,6 +69,133 @@ backend app_servers
   sever web2 192.168.1.30:80 check
 ```
 
+### Install dan Konfigurasi DNS Server
+```bash
+# Install DNS Server
+sudo apt update && sudo apt upgrade
+sudo apt install bind9
+# konfigurasi DNS Server
+cd /etc/bind
+sudo cp db.127 db.ip
+sudo cp db.local db.domain
+```
+# setelah 2 file tersebut terbuka edit file db.domain
+sudo nano db.domain
+```bash
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     scrserv.com. root.scrserv.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      scrserv.com.
+@       IN      A       192.168.1.5
+www     IN      A       192.168.1.5
+blog    IN      A       192.168.1.5
+```
+
+# jika ingin menambahkan mx record yang akan digunakan ikuti konfigurasi seperti dibawah
+```bash
+#konfigurasi
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     scrserv.com. root.sceserv.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      scrserv.com.
+        IN      MX      10 scrserv.com.
+@       IN      A       192.168.1.5
+www     IN      A       192.168.1.5
+mail    IN      A       192.168.1.5
+blog    IN      CNAME   www
+```
+
+#konfigurasi pada db.ip
+```bash
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     scrserv.com. root.scrserv.com. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      scrserv.com.
+5      IN      PTR     scrserv.com.
+```
+```bash
+sudo nano named.conf.local
+#konfigurasi
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "scrserv.com"{
+        type master;
+        file "/etc/bind/db.domain";
+};
+
+zone "1.1.10.in-addr.arpa"{
+        type master;
+        file "/etc/bind/db.ip";
+};
+```
+
+# melakukan forwarding untuk mengakses domain seperti google.com, facebook.com. disini menggunakan DNS dari google 8.8.8.8 sebagai forwarding
+```bash
+# konfigurasi
+sudo nano named.conf.option
+# konfigurasi seperti berikut
+
+options {
+        directory "/var/cache/bind";
+
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        // If your ISP provided one or more IP addresses for stable
+        // nameservers, you probably want to use them as forwarders.
+        // Uncomment the following block, and insert the addresses replacing
+        // the all-0's placeholder.
+
+        forwarders {
+        8.8.8.8;
+        };
+
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        dnssec-validation no;
+
+        listen-on-v6 { any; };
+};
+```
+#melakukan restart & status
+```bash
+sudo systemctl restart bind9.service
+sudo systemctl status bind9.service
+```
+
 ### Install SSL
 ```bash
 #Konfigurasi Netplan
