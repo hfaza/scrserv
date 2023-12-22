@@ -325,3 +325,8 @@ sudo nginx -t
 #restart nginx
 sudo systemctl restart nginx
 ```
+
+
+
+
+
