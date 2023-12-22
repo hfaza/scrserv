@@ -65,8 +65,8 @@ frontend web
   default_backend app_servers
 backend app_servers
   balance roundrobin
-  sever web1 192.168.179.5:80 check
-  sever web2 192.168.179.10:80 check
+  sever web1 192.168.1.20:80 check
+  sever web2 192.168.1.30:80 check
 ```
 
 ### Install  netdata
@@ -122,8 +122,8 @@ network:
   ethernets:
     enp0s3:
       dhcp4: no
-      addresses: [192.168.179.5/24]
-      gateway: 192.168.179.1
+      addresses: [192.168.1.20/24]
+      gateway: 192.168.1.1
   version: 2
 
 #Sistem operasi kedua
@@ -132,12 +132,15 @@ network:
   ethernets:
     enp0s3:
       dhcp4: no
-      addresses: [192.168.179.5/24]
-      gateway: 192.168.179.1
+      addresses: [192.168.1.30/24]
+      gateway: 192.168.1.1
   version: 2
 
 #Setelah semua konfigurasi selesai matikan kembali port yang tidak digunakan
-#Hanya server yang dapat mengakses web server 
+#Hanya server yang dapat mengakses web server
+sudo ufw enable
+sudo ufw allow from 192.168.1.5 to any port 80/tcp
+sudo ufw deny 80/tcp
 ```
 ![download](https://github.com/Xzhacts-Crew/scrserv/blob/main/webserv_port.jpg)
 
