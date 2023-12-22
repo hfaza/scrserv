@@ -244,11 +244,9 @@ sudo ufw allow 19999/tcp
 ## Install NginX
 ![download](https://github.com/dword32bit/SysAdmin/assets/114817148/e3318239-a3a4-449d-bd86-79edc65c4b7f)
 Saya menggunakan NginX untuk mengelola Web saya yang berada dalam dua sistem operasi yang terpisah dengan server
-
 ```bash
 #Installasi NginX
 sudo apt install nginx
-
 #Periksa status NginX
 sudo systemctl status nginx
 ```
@@ -325,8 +323,3 @@ sudo nginx -t
 #restart nginx
 sudo systemctl restart nginx
 ```
-
-
-
-
-
